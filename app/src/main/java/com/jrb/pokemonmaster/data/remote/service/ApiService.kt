@@ -2,20 +2,20 @@ package com.jrb.pokemonmaster.data.remote.service
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class ApiService @Inject constructor(
+class ApiService (
     private val api: ApiClient
 )
 {
     suspend fun getPokemonList() =
         callServiceCoordinator {
-            val pokemonList = api.getPokemonList()
+            api.getPokemonList()
         }
 
-    suspend fun getPokemonData() =
+    suspend fun getPokemonData(name: String) =
         callServiceCoordinator {
-            val pokemonData = api.getPokemonData()
+            val url = "pokemon/${name}"
+            api.getPokemonData(url)
         }
 
     private suspend fun <T> callServiceCoordinator(

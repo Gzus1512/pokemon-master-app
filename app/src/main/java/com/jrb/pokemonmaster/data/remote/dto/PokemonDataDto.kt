@@ -8,5 +8,5 @@ data class PokemonDataDto(
     @field:Json(name = "height") val height: String?,
     @field:Json(name = "weight") val weight: String?,
     @field:Json(name = "sprites") val sprites: SpriteDto?,
-    @field:Json(name = "types") val types: List<TypeDto>
+    @field:Json(name = "types") val types: List<TypeListDto>
 )
