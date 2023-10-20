@@ -1,5 +1,6 @@
 package com.jrb.pokemonmaster.presentation.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +18,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jrb.pokemonmaster.R
+import com.jrb.pokemonmaster.domain.model.PokemonDataModel
 import com.jrb.pokemonmaster.presentation.RoundedImageView
 import com.jrb.pokemonmaster.presentation.viewmodel.ViewState
 
@@ -55,14 +60,17 @@ fun DetailsScreen(
                             .fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Column {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
                             RoundedImageView(
                                 image = pokemonData.imageUrl,
                                 modifier = Modifier.size(200.dp)
                             )
-                            Text(text = pokemonData.height)
-                            Text(text = pokemonData.weight)
-                            Text(text = "Types:")
+                            Text(text = "${stringResource(id = R.string.pokemon_height_text)} ${pokemonData.height}")
+                            Text(text = "${stringResource(id = R.string.pokemon_weight_text)} ${pokemonData.weight}")
+                            Text(text = stringResource(id = R.string.pokemon_types_text))
                             pokemonData.types.forEach{
                                 Text(text = it)
                             }
@@ -88,5 +96,38 @@ fun GoBackButton(
 ) {
     Button(onClick = { navBack() }) {
         Text(text = "Go back")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewDetails() {
+    val viewState = ViewState(
+        pokemonList = listOf(
+            PokemonDataModel(
+                name = "Bulbasaur",
+                imageUrl = "",
+                weight = "43",
+                height = "7",
+                types = listOf(
+                    "fire", "wind"
+                )
+            ),
+            PokemonDataModel(
+                name = "Bulbasaur",
+                imageUrl = "",
+                weight = "43",
+                height = "7",
+                types = listOf(
+                    "fire", "wind"
+                )
+            )
+        )
+    )
+    DetailsScreen(
+        viewState,
+        "Bulbasaur"
+    ) {
+
     }
 }

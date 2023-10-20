@@ -36,6 +36,7 @@ fun DashboardScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
+
             !viewState.error.isNullOrEmpty() -> {
                 Text(
                     text = viewState.error,
@@ -44,6 +45,7 @@ fun DashboardScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
+
             viewState.pokemonList.isNotEmpty() -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -71,7 +73,28 @@ fun DashboardScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewDashboard() {
-    val viewState = ViewState()
+    val viewState = ViewState(
+        pokemonList = listOf(
+            PokemonDataModel(
+                name = "Bulbasaur",
+                imageUrl = "",
+                weight = "43",
+                height = "7",
+                types = listOf(
+                    "fire", "wind"
+                )
+            ),
+            PokemonDataModel(
+                name = "Bulbasaur",
+                imageUrl = "",
+                weight = "43",
+                height = "7",
+                types = listOf(
+                    "fire", "wind"
+                )
+            )
+        )
+    )
     DashboardScreen(
         viewState
     ) {
